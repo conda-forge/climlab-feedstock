@@ -13,7 +13,7 @@ source:
 
 build:
   number: 2
-  skip: True  # [win and py3k or win64]
+  skip: True  # [win and py3k or win64 or not py2k]
 
 requirements:
   build:
