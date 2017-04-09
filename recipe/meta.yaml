@@ -13,11 +13,12 @@ source:
 
 build:
   number: 0
-  skip: true  # [win or not py2k]
+  skip: True  # [win and py3k or win64]
 
 requirements:
   build:
     - toolchain
+    - mingwpy  # [win]
     - gcc  # [osx]
     - python
     - setuptools
