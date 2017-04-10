@@ -12,8 +12,8 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
-  skip: True  # [py3k or win64]
+  number: 2
+  skip: True  # [not py2k]
 
 requirements:
   build:
