@@ -1,6 +1,6 @@
 {% set name = "climlab" %}
-{% set version = "0.5.6" %}
-{% set sha256 = "d445c26e230517722b1d3d36f23fbbd6eb1bf22f0fec72e0cc3130ee0a8d0c74" %}
+{% set version = "0.6.0" %}
+{% set sha256 = "28c2b025d07a645b1ed35c5490f22f133cd4e63340206e0d39b2782d07cf223f" %}
 
 package:
   name: {{ name|lower }}
@@ -12,8 +12,8 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 2
-  skip: True  # [not py2k]
+  number: 1
+  skip: True  # [win and py3k]
 
 requirements:
   build:
@@ -23,15 +23,17 @@ requirements:
     - python
     - setuptools
     - libgfortran  # [linux]
-    - numpy x.x
+    - numpy 1.11.*
 
   run:
-    - python 2.7*
-    - numpy x.x
+    - python
+    - numpy >=1.11
     - scipy
     - netcdf4
     - pytest
     - libgfortran  # [linux or osx]
+    - future
+    - numba  # [py2k]
 
 test:
   requires:
