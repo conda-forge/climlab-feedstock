@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   #skip: True  # [not py2k]
 
 requirements:
@@ -23,11 +23,11 @@ requirements:
     - python
     - setuptools
     - libgfortran  # [linux]
-    - numpy x.x
+    - numpy 1.11.*
 
   run:
     - python
-    - numpy x.x
+    - numpy >=1.11
     - scipy
     - netcdf4
     - pytest
