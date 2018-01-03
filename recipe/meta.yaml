@@ -30,6 +30,7 @@ requirements:
     - numpy >=1.11
     - scipy
     - netcdf4
+    - xarray
     - pytest
     - libgfortran  # [linux or osx]
     - future
