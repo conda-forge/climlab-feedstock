@@ -12,6 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
+  skip: True  # [win32 and py3k]
   number: 1
 
 requirements:
