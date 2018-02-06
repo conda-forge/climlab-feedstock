@@ -12,22 +12,24 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
-  skip: True  # [win and py3k]
+  number: 1
 
 requirements:
   build:
     - toolchain
-    - mingwpy  # [win]
+    - mingwpy  # [win and py2k]
+    - flang  # [win and py3k]
     - gcc  # [osx]
     - python
     - setuptools
     - libgfortran  # [linux]
-    - numpy 1.11.*
+    - numpy 1.11.*  # [not (win and py3k)]
+    - numpy 1.14.*  # [win and py3k]
 
   run:
     - python
-    - numpy >=1.11
+    - numpy >=1.11  # [not (win and py3k)]
+    - numpy >=1.14  # [win and py3k]
     - scipy
     - netcdf4
     - xarray
