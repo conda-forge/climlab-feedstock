@@ -30,6 +30,7 @@ requirements:
     - python
     - numpy >=1.11  # [not (win and py3k)]
     - numpy >=1.14  # [win and py3k]
+    - libflang  # [win and py3k]
     - scipy
     - netcdf4
     - xarray
