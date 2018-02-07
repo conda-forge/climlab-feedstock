@@ -188,25 +188,3 @@ index 2cd2a46..0286d53 100644
  
  ! Local variable
 
-From fcd9ff97966bcdc2b05698423a2ef7d2c79b0c3e Mon Sep 17 00:00:00 2001
-From: xoviat <xoviat@users.noreply.github.com>
-Date: Wed, 7 Feb 2018 16:01:44 -0600
-Subject: [PATCH 3/3] Ignore generated sources
-
----
- .gitignore | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/.gitignore b/.gitignore
-index 7385e4b..10c0c1f 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -19,3 +19,7 @@
- 
- # documentation built by sphinx
- /docs/build/
-+
-+*.pyd
-+*-f2pywrappers2.f90
-+_*module.c
-\ No newline at end of file
