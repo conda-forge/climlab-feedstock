@@ -188,3 +188,27 @@ index 2cd2a46..0286d53 100644
  
  ! Local variable
 
+From d1b72edd0fa8141cff3b6be3ed6e4ea762886343 Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Wed, 7 Feb 2018 17:15:32 -0600
+Subject: [PATCH] Reorder source compilation
+
+---
+ climlab/radiation/cam3/setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/climlab/radiation/cam3/setup.py b/climlab/radiation/cam3/setup.py
+index d4e66bb..b7aab7b 100644
+--- a/climlab/radiation/cam3/setup.py
++++ b/climlab/radiation/cam3/setup.py
+@@ -40,9 +40,9 @@ def cam3_gen_source(ext, build_dir):
+     #  Fortran 90 sources in order of compilation
+     fort90source = ['pmgrid.F90',
+                 'prescribed_aerosols.F90',
++                'shr_kind_mod.F90',
+                 'quicksort.F90',
+                 'abortutils.F90',
+-                'shr_kind_mod.F90',
+                 'absems.F90',
+                 'wv_saturation.F90',
+                 'aer_optics.F90',
