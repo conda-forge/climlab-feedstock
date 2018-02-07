@@ -1,0 +1,212 @@
+From 3472ec13d9ccae39c1cca9ac174826ac52246303 Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Wed, 7 Feb 2018 15:36:30 -0600
+Subject: [PATCH 1/3] Remove custom compiler code
+
+---
+ climlab/radiation/rrtm/_rrtmg_lw/setup.py | 59 +++++++++++--------------------
+ climlab/radiation/rrtm/_rrtmg_sw/setup.py | 55 ++++++++++------------------
+ 2 files changed, 38 insertions(+), 76 deletions(-)
+
+diff --git a/climlab/radiation/rrtm/_rrtmg_lw/setup.py b/climlab/radiation/rrtm/_rrtmg_lw/setup.py
+index 151038f..cf03eb8 100755
+--- a/climlab/radiation/rrtm/_rrtmg_lw/setup.py
++++ b/climlab/radiation/rrtm/_rrtmg_lw/setup.py
+@@ -63,53 +63,34 @@ def configuration(parent_package='', top_path=None):
+         print('No Fortran compiler found, not building the RRTMG_LW radiation module!')
+         build = False
+ 
++    module_src = []
++    for item in modules:
++        fullname = join('rrtmg_lw_v4.85','gcm_model','modules',item)
++        module_src.append(fullname)
++    for item in src:
++        if item in mod_src:
++            fullname = join('sourcemods',item)
++        else:
++            fullname = join('rrtmg_lw_v4.85','gcm_model','src',item)
++        module_src.append(fullname)
++
+     config = Configuration(package_name='_rrtmg_lw', parent_name=parent_package, top_path=top_path)
+     if build:
+-        link_args_list = build_extra_objects(f90flags)
+-        config.add_extension(name='_rrtmg_lw',
+-                             sources=[rrtmg_lw_gen_source],
+-                             extra_f90_compile_args=f90flags + ['-O3'],
+-                             f2py_options=['--quiet'],
+-                             extra_link_args=link_args_list,
+-                             )
+-    return config
++        config.add_extension(
++            name='_rrtmg_lw',
++            sources=module_src + [rrtmg_lw_gen_source],
++            extra_f90_compile_args=f90flags,
++            f2py_options=['--quiet'],
++        )
+ 
+-def build_extra_objects(f90flags):
+-    import subprocess, glob
+-    thispath = config.local_path
+-    object_file_list = []
+-    #  Compile all source to object .o files
+-    gfortran_call = ['gfortran', '-c', ] + f90flags
+-    try:
+-        for item in modules:
+-            optflag = '-O3'
+-            output_file = item[:-3]+'o'
+-            object_file_list.append(output_file)
+-            fullname = join(thispath,'rrtmg_lw_v4.85','gcm_model','modules',item)
+-            subprocess.call(gfortran_call + [fullname] + [optflag] + ['-o'] + [output_file])
+-        for item in src:
+-            if item in mod_src:
+-                fullname = join(thispath,'sourcemods',item)
+-            else:
+-                fullname = join(thispath,'rrtmg_lw_v4.85','gcm_model','src',item)
+-            if item in unoptimized_src:
+-                optflag = '-O0'
+-            else:
+-                optflag = '-O3'
+-            output_file = item[:-3]+'o'
+-            object_file_list.append(output_file)
+-            subprocess.call(gfortran_call + [fullname] + [optflag] + ['-o'] + [output_file])
+-        return object_file_list
+-    except:
+-        print('There was a problem with compiling rrtmg_sw objects.')
+-        return None
++    return config
+ 
+ def rrtmg_lw_gen_source(ext, build_dir):
+     '''Add RRTMG_LW fortran source if Fortran 90 compiler available,
+     if no compiler is found do not try to build the extension.'''
+     thispath = config.local_path
+-    sourcelist = [join(thispath,'_rrtmg_lw.pyf'),
+-                  join(thispath,'Driver.f90')]
++    sourcelist = [join(thispath, '_rrtmg_lw.pyf'),
++                  join(thispath, 'Driver.f90')]
+     try:
+         config.have_f90c()
+         return sourcelist
+diff --git a/climlab/radiation/rrtm/_rrtmg_sw/setup.py b/climlab/radiation/rrtm/_rrtmg_sw/setup.py
+index 311a5f6..350d621 100755
+--- a/climlab/radiation/rrtm/_rrtmg_sw/setup.py
++++ b/climlab/radiation/rrtm/_rrtmg_sw/setup.py
+@@ -65,46 +65,27 @@ def configuration(parent_package='', top_path=None):
+         build = False
+ 
+     config = Configuration(package_name='_rrtmg_sw', parent_name=parent_package, top_path=top_path)
++
++    module_src = []
++    for item in modules:
++        fullname = join('rrtmg_sw_v4.0','gcm_model','modules',item)
++        module_src.append(fullname)
++    for item in src:
++        if item in mod_src:
++            fullname = join('sourcemods',item)
++        else:
++            fullname = join('rrtmg_sw_v4.0','gcm_model','src',item)
++        module_src.append(fullname)
++
+     if build:
+-        link_args_list = build_extra_objects(f90flags)
+-        config.add_extension(name='_rrtmg_sw',
+-                             sources=[rrtmg_sw_gen_source],
+-                             extra_f90_compile_args=f90flags + ['-O3'],
+-                            f2py_options=['--quiet'],
+-                            extra_link_args=link_args_list,
+-                            )
++        config.add_extension(
++            name='_rrtmg_sw',
++            sources=module_src + [rrtmg_sw_gen_source],
++            extra_f90_compile_args=f90flags,
++            f2py_options=['--quiet'],
++        )
+     return config
+ 
+-def build_extra_objects(f90flags):
+-    import subprocess
+-    thispath = config.local_path
+-    object_file_list = []
+-    #  Compile all source to object .o files
+-    gfortran_call = ['gfortran', '-c', ] + f90flags
+-    try:
+-        for item in modules:
+-            optflag = '-O3'
+-            output_file = item[:-3]+'o'
+-            object_file_list.append(output_file)
+-            fullname = join(thispath,'rrtmg_sw_v4.0','gcm_model','modules',item)
+-            subprocess.call(gfortran_call + [fullname] + [optflag] + ['-o'] + [output_file])
+-        for item in src:
+-            if item in mod_src:
+-                fullname = join(thispath,'sourcemods',item)
+-            else:
+-                fullname = join(thispath,'rrtmg_sw_v4.0','gcm_model','src',item)
+-            if item in unoptimized_src:
+-                optflag = '-O0'
+-            else:
+-                optflag = '-O3'
+-            output_file = item[:-3]+'o'
+-            object_file_list.append(output_file)
+-            subprocess.call(gfortran_call + [fullname] + [optflag] + ['-o'] + [output_file])
+-        return object_file_list
+-    except:
+-        print('There was a problem with compiling rrtmg_sw objects.')
+-        return None
+-
+ def rrtmg_sw_gen_source(ext, build_dir):
+     '''Add RRTMG_SW fortran source if Fortran 90 compiler available,
+     if no compiler is found do not try to build the extension.'''
+
+From a8800f79922ed8c08e97001b596978e2b33b080a Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Wed, 7 Feb 2018 16:00:23 -0600
+Subject: [PATCH 2/3] Fix inconsistent type definition
+
+---
+ climlab/radiation/cam3/src/quicksort.F90 | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/climlab/radiation/cam3/src/quicksort.F90 b/climlab/radiation/cam3/src/quicksort.F90
+index 2cd2a46..0286d53 100644
+--- a/climlab/radiation/cam3/src/quicksort.F90
++++ b/climlab/radiation/cam3/src/quicksort.F90
+@@ -12,6 +12,8 @@ module quicksort
+ ! mvr modified integer array to intent inout - may now be any integer 
+ !     array that gets sorted along with associated real array
+ 
++use shr_kind_mod,      only: r8 => shr_kind_r8
++
+ implicit none
+ save
+ private
+@@ -22,7 +24,7 @@ RECURSIVE SUBROUTINE quick_sort(list, order)
+ 
+ implicit none
+ 
+-REAL, DIMENSION (:), INTENT(INOUT)  :: list
++REAL(r8), DIMENSION (:), INTENT(INOUT)  :: list
+ INTEGER, DIMENSION (:), INTENT(INOUT)  :: order
+ 
+ ! Local variable
+
+From fcd9ff97966bcdc2b05698423a2ef7d2c79b0c3e Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Wed, 7 Feb 2018 16:01:44 -0600
+Subject: [PATCH 3/3] Ignore generated sources
+
+---
+ .gitignore | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/.gitignore b/.gitignore
+index 7385e4b..10c0c1f 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -19,3 +19,7 @@
+ 
+ # documentation built by sphinx
+ /docs/build/
++
++*.pyd
++*-f2pywrappers2.f90
++_*module.c
+\ No newline at end of file
