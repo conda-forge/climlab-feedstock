@@ -12,8 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
-  #skip: True  # [win and py3k]
+  number: 2
 
 requirements:
   build:
@@ -42,7 +41,7 @@ test:
   imports:
     - climlab
   commands:
-    - pytest -v --pyargs climlab.tests.test_rrtm
+    - pytest -v -m fast --pyargs climlab.tests
 
 about:
   home: https://github.com/brian-rose/climlab
