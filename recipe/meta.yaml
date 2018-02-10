@@ -1,6 +1,6 @@
 {% set name = "climlab" %}
-{% set version = "0.6.2" %}
-{% set sha256 = "de518b1cb9c00b579531a33cb60483b31b5777b3f20a12181f6aab027bc094a8" %}
+{% set version = "0.6.3.dev1" %}
+{% set sha256 = "eaa0e1f1f9f38a1c30f9e93471e55d640ee346a952cf1235589c3dc6d6486fcb" %}
 
 package:
   name: {{ name|lower }}
@@ -12,21 +12,26 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 2
+  skip: True  # [win32 and py3k]
+  number: 0
 
 requirements:
   build:
     - toolchain
-    - mingwpy  # [win]
+    - mingwpy  # [win and py2k]
+    - flang  # [win and py3k]
     - gcc  # [osx]
     - python
     - setuptools
     - libgfortran  # [linux]
-    - numpy 1.11.*
+    - numpy 1.11.*  # [not (win and py3k)]
+    - numpy 1.14.*  # [win and py3k]
 
   run:
     - python
-    - numpy >=1.11
+    - numpy >=1.11  # [not (win and py3k)]
+    - numpy >=1.14  # [win and py3k]
+    - libflang  # [win and py3k]
     - scipy
     - netcdf4
     - xarray
