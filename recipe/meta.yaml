@@ -1,6 +1,6 @@
 {% set name = "climlab" %}
-{% set version = "0.6.3.dev1" %}
-{% set sha256 = "eaa0e1f1f9f38a1c30f9e93471e55d640ee346a952cf1235589c3dc6d6486fcb" %}
+{% set version = "0.6.3.dev4" %}
+{% set sha256 = "95f3a03c7ec1cf3b60a0f3c9c56daa1c807c7812ef232e3383a03a925da0a583" %}
 
 package:
   name: {{ name|lower }}
@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  skip: True  # [win32 or (win and (py2k or py35)) or (osx and py35)]
+  skip: True  # [win32]
   number: 0
 
 requirements:
@@ -35,7 +35,6 @@ requirements:
     - scipy
     - netcdf4
     - xarray
-    - pytest
     - libgfortran  # [linux or osx]
     - future
     - numba  # [py2k]
