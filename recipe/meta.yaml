@@ -1,6 +1,6 @@
 {% set name = "climlab" %}
-{% set version = "0.6.3.dev5" %}
-{% set sha256 = "cc527ca78bf51be678b4ba0b3273c96b8cbe81d9e76c9939e9b18768403c8e17" %}
+{% set version = "0.6.3.dev6" %}
+{% set sha256 = "07ed9f53b4b714381e2f663da92f8b0e789c7e0db115a7cb9dba66d168d377d2" %}
 
 package:
   name: {{ name|lower }}
