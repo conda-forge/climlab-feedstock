@@ -1,6 +1,6 @@
 {% set name = "climlab" %}
-{% set version = "0.6.2" %}
-{% set sha256 = "de518b1cb9c00b579531a33cb60483b31b5777b3f20a12181f6aab027bc094a8" %}
+{% set version = "0.6.3.dev7" %}
+{% set sha256 = "0cdc17dd531b5f7c741d79b1c0a5928adb1ea051cd285e0d654ca4c275f3704d" %}
 
 package:
   name: {{ name|lower }}
@@ -12,26 +12,29 @@ source:
   sha256: {{ sha256 }}
 
 build:
+  skip: True  # [win32 and py3k]
   number: 0
-  skip: True  # [win and py3k]
 
 requirements:
   build:
     - toolchain
-    - mingwpy  # [win]
+    - mingwpy  # [win and py2k]
+    - flang  # [win and py3k]
     - gcc  # [osx]
     - python
     - setuptools
     - libgfortran  # [linux]
-    - numpy 1.11.*
+    - numpy 1.11.*  # [not (win and py3k)]
+    - numpy 1.14.*  # [win and py3k]
 
   run:
     - python
-    - numpy >=1.11
+    - numpy >=1.11  # [not (win and py3k)]
+    - numpy >=1.14  # [win and py3k]
+    - libflang  # [win and py3k]
     - scipy
     - netcdf4
     - xarray
-    - pytest
     - libgfortran  # [linux or osx]
     - future
     - numba  # [py2k]
@@ -42,7 +45,7 @@ test:
   imports:
     - climlab
   commands:
-    - pytest -v --pyargs climlab.tests.test_rrtm
+    - pytest -v -m fast --pyargs climlab.tests
 
 about:
   home: https://github.com/brian-rose/climlab
