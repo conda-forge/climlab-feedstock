@@ -1,6 +1,6 @@
 {% set name = "climlab" %}
-{% set version = "0.6.3.dev7" %}
-{% set sha256 = "0cdc17dd531b5f7c741d79b1c0a5928adb1ea051cd285e0d654ca4c275f3704d" %}
+{% set version = "0.6.3" %}
+{% set sha256 = "74881dc55fb430cfc22fca465dcd2196972e5539e7b4a5411ab19d5fc82d9050" %}
 
 package:
   name: {{ name|lower }}
@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  skip: True  # [win32 and py3k]
+  skip: True  # [(win and py2k) or (win32 and py3k)]
   number: 0
 
 requirements:
