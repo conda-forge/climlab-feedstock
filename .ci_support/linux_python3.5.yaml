@@ -1,5 +1,3 @@
-numpy:
-- '1.9'
 pin_run_as_build:
   python:
     min_pin: x.x
