@@ -17,25 +17,25 @@ build:
 
 requirements:
   build:
-    - toolchain
-    - mingwpy  # [win and py2k]
+    - {{ compiler('fortran') }}        # [unix]
+    - {{ compiler('m2w64_fortran') }}  # [win]
+    - {{ compiler('c') }}        # [unix]
+    - {{ compiler('m2w64_c') }}  # [win]
+  host:
     - flang  # [win and py3k]
-    - gcc  # [osx]
     - python
     - setuptools
-    - libgfortran  # [linux]
-    - numpy 1.11.*  # [not (win and py3k)]
-    - numpy 1.14.*  # [win and py3k]
+    - numpy         # [not (win and py3k)]
+    - numpy         # [win and py3k]
 
   run:
     - python
-    - numpy >=1.11  # [not (win and py3k)]
-    - numpy >=1.14  # [win and py3k]
+    - {{ pin_compatible('numpy') }}   # [not (win and py3k)]
+    - {{ pin_compatible('numpy') }}   # [win and py3k]
     - libflang  # [win and py3k]
     - scipy
     - netcdf4
     - xarray
-    - libgfortran  # [linux or osx]
     - future
     - numba  # [py2k]
 
