@@ -22,14 +22,12 @@ requirements:
      - {{ compiler('c') }}        # [unix]
      - {{ compiler('m2w64_c') }}  # [win]
   host:
-    - flang  # [win and py3k]
     - python
     - setuptools
     - numpy
   run:
     - python
     - {{ pin_compatible('numpy') }}
-    - libflang  # [win and py3k]
     - scipy
     - netcdf4
     - xarray
