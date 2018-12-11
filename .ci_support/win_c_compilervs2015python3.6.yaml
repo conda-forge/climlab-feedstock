@@ -1,11 +1,11 @@
+c_compiler:
+- vs2015
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
-m2w64_c_compiler:
-- m2w64-toolchain
-m2w64_fortran_compiler:
-- m2w64-toolchain
+fortran_compiler:
+- flang
 numpy:
 - '1.11'
 pin_run_as_build:
@@ -14,3 +14,6 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - '3.6'
+zip_keys:
+- - python
+  - c_compiler
