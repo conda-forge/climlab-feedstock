@@ -12,30 +12,25 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  skip: True  # [(win and py2k) or (win32 and py3k)]
+  skip: True  # [win32 or (win and py27)]
   number: 0
 
 requirements:
   build:
-    - toolchain
-    - mingwpy  # [win and py2k]
+     - {{ compiler('fortran') }}       
+     - {{ compiler('c') }}
+  host:
     - flang  # [win and py3k]
-    - gcc  # [osx]
     - python
     - setuptools
-    - libgfortran  # [linux]
-    - numpy 1.11.*  # [not (win and py3k)]
-    - numpy 1.14.*  # [win and py3k]
-
+    - numpy
   run:
     - python
-    - numpy >=1.11  # [not (win and py3k)]
-    - numpy >=1.14  # [win and py3k]
+    - {{ pin_compatible('numpy') }}
     - libflang  # [win and py3k]
     - scipy
     - netcdf4
     - xarray
-    - libgfortran  # [linux or osx]
     - future
     - numba  # [py2k]
 
