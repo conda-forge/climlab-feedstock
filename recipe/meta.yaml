@@ -12,13 +12,13 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  skip: True  # win32 
+  skip: True  # win32
   number: 1
 
 requirements:
   build:
-     - {{ compiler('fortran') }}   #[not (win and py27)]
-     - {{ compiler('c') }}   # [not (win and py27)]
+     - {{ compiler('fortran') }}  # [not (win and py27)]
+     - {{ compiler('c') }}  # [not (win and py27)]
      - {{ compiler('m2w64_fortran') }}  # [win and py27]
      - {{ compiler('m2w64_c') }}  # [win and py27]
   host:
