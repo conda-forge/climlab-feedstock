@@ -17,8 +17,8 @@ build:
 
 requirements:
   build:
-     - {{ compiler('fortran') }}  # [not (win and py27)]
-     - {{ compiler('c') }}  # [not (win and py27)]
+     - {{ compiler('fortran') }}  # [unix or (win and py3k)]
+     - {{ compiler('c') }}  # [unix or (win and py3k)]
      - {{ compiler('m2w64_fortran') }}  # [win and py27]
      - {{ compiler('m2w64_c') }}  # [win and py27]
   host:
