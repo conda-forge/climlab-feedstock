@@ -1,6 +1,6 @@
 {% set name = "climlab" %}
-{% set version = "0.7.0" %}
-{% set sha256 = "7c69a09033e0aa412707b620687ea0a04b2a1b03967a070ba1176db083c94af7" %}
+{% set version = "0.7.1" %}
+{% set sha256 = "018318907614cc55b9e61858de3d78c010dd218b370457c7cde75bccaa186d39" %}
 
 package:
   name: {{ name|lower }}
@@ -17,7 +17,7 @@ build:
 
 requirements:
   build:
-     - {{ compiler('fortran') }}       
+     - {{ compiler('fortran') }}
      - {{ compiler('c') }}
   host:
     - flang  # [win and py3k]
@@ -29,9 +29,9 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - libflang  # [win and py3k]
     - scipy
-    - netcdf4
     - xarray
     - future
+    - attrdict
     - numba  # [py2k]
 
 test:
