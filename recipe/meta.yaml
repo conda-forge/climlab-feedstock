@@ -23,7 +23,8 @@ requirements:
     - flang  # [win and py3k]
     - python
     - setuptools
-    - numpy
+    - numpy  # [not win]
+    - numpy 1.14  # [win and py3k]
   run:
     - python
     - {{ pin_compatible('numpy') }}
