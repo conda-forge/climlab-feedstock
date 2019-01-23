@@ -29,9 +29,10 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - libflang  # [win and py3k]
     - scipy
-    - netcdf4
     - xarray
+    - netcdf4
     - future
+    - attrdict
     - numba  # [py2k]
 
 test:
