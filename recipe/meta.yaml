@@ -30,6 +30,7 @@ requirements:
     - libflang  # [win and py3k]
     - scipy
     - xarray
+    - netcdf4
     - future
     - attrdict
     - numba  # [py2k]
