@@ -1,19 +1,16 @@
-{% set name = "climlab" %}
 {% set version = "0.7.1" %}
-{% set sha256 = "018318907614cc55b9e61858de3d78c010dd218b370457c7cde75bccaa186d39" %}
 
 package:
-  name: {{ name|lower }}
+  name: climlab
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://pypi.io/packages/source/c/climlab/climlab-{{ version }}.tar.gz
+  sha256: 018318907614cc55b9e61858de3d78c010dd218b370457c7cde75bccaa186d39
 
 build:
   skip: True  # [win32 or (win and py27)]
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -23,15 +20,13 @@ requirements:
     - flang  # [win and py3k]
     - python
     - setuptools
-    - numpy  # [not win]
-    - numpy 1.14  # [win and py3k]
+    - numpy
   run:
     - python
     - {{ pin_compatible('numpy') }}
     - libflang  # [win and py3k]
     - scipy
     - xarray
-    - netcdf4
     - future
     - attrdict
     - numba  # [py2k]
