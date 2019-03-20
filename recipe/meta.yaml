@@ -34,13 +34,11 @@ requirements:
 test:
   requires:
     - pytest
-    - codecov
     - pytest-cov
   imports:
     - climlab
   commands:
-    - pytest -v -m fast --pyargs climlab.tests --cov=climlab --cov-config .coveragerc --cov-report term-missing -v
-    - codecov
+    - pytest -v -m fast --pyargs climlab.tests --cov=climlab
 
 about:
   home: https://github.com/brian-rose/climlab
