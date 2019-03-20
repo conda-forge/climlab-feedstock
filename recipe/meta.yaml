@@ -1,16 +1,16 @@
-{% set version = "0.7.1" %}
+{% set version = "0.7.2.dev0" %}
 
 package:
   name: climlab
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/c/climlab/climlab-{{ version }}.tar.gz
-  sha256: 018318907614cc55b9e61858de3d78c010dd218b370457c7cde75bccaa186d39
+  git_url: https://github.com/brian-rose/climlab.git
+  git_tag: master
 
 build:
+  number: 0
   skip: True  # [win32 or (win and py27)]
-  number: 1
 
 requirements:
   build:
@@ -34,10 +34,13 @@ requirements:
 test:
   requires:
     - pytest
+    - codecov
+    - pytest-cov
   imports:
     - climlab
   commands:
-    - pytest -v -m fast --pyargs climlab.tests
+    - pytest -v -m fast --pyargs climlab.tests --cov=climlab --cov-config .coveragerc --cov-report term-missing -v
+    - codecov
 
 about:
   home: https://github.com/brian-rose/climlab
