@@ -19,7 +19,7 @@ requirements:
   host:
     - flang  # [win and py3k]
     - python
-    - setuptools
+    - pip
     - numpy
   run:
     - python
