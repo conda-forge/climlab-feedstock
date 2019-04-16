@@ -27,6 +27,8 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - libflang  # [win and py3k]
     - scipy
+    - pydap
+    - urllib3
     - xarray
     - future
     - attrdict
