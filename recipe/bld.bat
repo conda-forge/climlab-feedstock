@@ -10,7 +10,7 @@ if "%PY3K"=="0" (
 
 REM remove chocolatey gfortran
 if "%CI" == "azure" (
-  set "PATH=%PATH:C:\ProgramData\Chocolatey\bin\=%"
+  rm "C:\ProgramData\Chocolatey\bin\gfortran.exe"
 )
 
 "%PYTHON%" -m pip install . --no-deps -vv
