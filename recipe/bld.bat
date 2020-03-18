@@ -9,7 +9,7 @@ if "%PY3K"=="0" (
 )
 
 REM remove chocolatey gfortran
-if "%CI" == "azure" (
+if "%CI%" == "azure" (
   rm "C:\ProgramData\Chocolatey\bin\gfortran.exe"
 )
 
