@@ -1,4 +1,4 @@
-{% set version = "0.7.7" %}
+{% set version = "0.7.8" %}
 
 package:
   name: climlab
@@ -6,10 +6,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/c/climlab/climlab-{{ version }}.tar.gz
-  sha256: 36c842fb2caa327392990a06a58414099af14bb76359378338d55326897cf650
+  sha256: a0f6477c6b97df139b9de3cd97ae9443cbfe113bdea4ae8121b18fe3c2e51687
 
 build:
-  number: 3
+  number: 0
   skip: true  # [win and py27]
 
 requirements:
