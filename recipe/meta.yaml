@@ -11,6 +11,7 @@ source:
 build:
   number: 0
   skip: true  # [win and py27]
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -19,7 +20,6 @@ requirements:
   host:
     - flang  # [win and py3k]
     - python
-    - setuptools
     - pip
     - numpy
   run:
@@ -36,9 +36,11 @@ requirements:
 test:
   requires:
     - pytest
+    - pip
   imports:
     - climlab
   commands:
+    - pip check
     - pytest -v -m fast --pyargs climlab.tests
 
 about:
