@@ -24,6 +24,7 @@ requirements:
     - setuptools
     - pip
     - numpy
+    - nomkl          # [win]
   run:
     - python
     - {{ pin_compatible('numpy') }}
@@ -33,6 +34,7 @@ requirements:
     - xarray
     - future
     - attrdict
+    - nomkl          # [win]
 
 test:
   requires:
