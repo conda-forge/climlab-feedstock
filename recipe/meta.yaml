@@ -24,12 +24,10 @@ requirements:
     - setuptools
     - pip
     - numpy
-    - nomkl          # [win]
   run:
     - python
     - {{ pin_compatible('numpy') }}
     - libflang  =5.0  # [win and py>=36]
-    - nomkl           # [win]
     - scipy
     - pooch
     - xarray
