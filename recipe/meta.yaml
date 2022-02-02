@@ -10,7 +10,7 @@ source:
   sha256: d3029100c5120563b4433d0b48a94eabaf90c2cf7c574242dcef802e3c2f9a0d
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win and py27]
 
 requirements:
@@ -59,3 +59,4 @@ about:
 extra:
   recipe-maintainers:
     - brian-rose
+    - jhkennedy
