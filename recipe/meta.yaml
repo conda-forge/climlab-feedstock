@@ -16,10 +16,10 @@ build:
 requirements:
   build:
     - {{ compiler('fortran') }}  # [not win]
-    - flang =5.0                 # [win]
+    - flang                      # [win]
     - {{ compiler('c') }}
   host:
-    - flang  # [win and py>=36]
+    - flang  # [win]
     - python
     - setuptools
     - pip
@@ -27,7 +27,7 @@ requirements:
   run:
     - python
     - {{ pin_compatible('numpy') }}
-    - libflang  =5.0  # [win and py>=36]
+    - libflang    # [win]
     - scipy
     - pooch
     - xarray
