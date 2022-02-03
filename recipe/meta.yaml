@@ -15,11 +15,12 @@ build:
 
 requirements:
   build:
-    - {{ compiler('fortran') }}  # [not win]
-    - flang                      # [win]
+    - {{ compiler('fortran') }}
+    - {{ compiler('m2w64_fortran') }} # [win]
     - {{ compiler('c') }}
   host:
-    - flang  # [win]
+    - m2w64-toolchain  # [win]
+    - libpython  # [win]
     - python
     - setuptools
     - pip
@@ -28,7 +29,6 @@ requirements:
   run:
     - python
     - {{ pin_compatible('numpy') }}
-    - libflang    # [win]
     - scipy
     - pooch
     - xarray
