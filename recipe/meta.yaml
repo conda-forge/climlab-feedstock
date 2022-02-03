@@ -10,8 +10,8 @@ source:
   sha256: d3029100c5120563b4433d0b48a94eabaf90c2cf7c574242dcef802e3c2f9a0d
 
 build:
-  number: 1
-  skip: true  # [win and py27]
+  number: 2
+  skip: true  # [win and py<30]
 
 requirements:
   build:
@@ -19,9 +19,11 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
     - {{ compiler('fortran') }}
+    - {{ compiler('m2w64_fortran') }}  # [win]
     - {{ compiler('c') }}
   host:
-    - flang  # [win and py3k]
+    - m2w64-toolchain  # [win]
+    - libpython  # [win]
     - python
     - setuptools
     - pip
@@ -29,7 +31,6 @@ requirements:
   run:
     - python
     - {{ pin_compatible('numpy') }}
-    - libflang  # [win and py3k]
     - scipy
     - pooch
     - xarray
@@ -43,12 +44,13 @@ test:
     - climlab
   commands:
     - pytest -v -m fast --pyargs climlab  # [not osx]
-    - pytest -v -m fast --pyargs climlab --ignore=test_emanuel_convection  # [osx]
+    # - pytest -v -m fast --pyargs climlab --ignore=test_emanuel_convection  # [osx]
     #  Note that we are skipping these particular tests on osx because of a
     #  mysterious failure on conda-forge
     #  that only shows up with certain combinations of numpy and python versions
     #  e.g. https://github.com/conda-forge/climlab-feedstock/pull/44
     #  I've manually verified that the builds pass all tests locally and behave normally
+    #    BUT WE CAN'T ACTUALLY MIX --pyargs with --ignore, it doesn't work
 
 about:
   home: https://github.com/brian-rose/climlab
