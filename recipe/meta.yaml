@@ -16,7 +16,7 @@ build:
 requirements:
   build:
     - {{ compiler('fortran') }}
-    - {{ compiler('m2w64_fortran') }} # [win]
+    - {{ compiler('m2w64_fortran') }}  # [win]
     - {{ compiler('c') }}
   host:
     - m2w64-toolchain  # [win]
