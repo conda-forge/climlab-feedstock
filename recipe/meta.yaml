@@ -1,16 +1,15 @@
-{% set version = "0.7.12" %}
+{% set version = "0.7.13" %}
 
 package:
   name: climlab
   version: {{ version }}
 
 source:
-  #path: /Users/br546577/code/climlab
   url: https://pypi.io/packages/source/c/climlab/climlab-{{ version }}.tar.gz
-  sha256: d3029100c5120563b4433d0b48a94eabaf90c2cf7c574242dcef802e3c2f9a0d
+  sha256: 0b9498bf6dd1ab97665cab34ce4602c1d781c3a6365cd243f53c1fa3af669c23
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win and py<30]
 
 requirements:
@@ -32,7 +31,6 @@ requirements:
     - pooch
     - xarray
     - future
-    - attrdict
 
 test:
   requires:
@@ -40,14 +38,7 @@ test:
   imports:
     - climlab
   commands:
-    - pytest -v -m fast --pyargs climlab  # [not osx]
-    # - pytest -v -m fast --pyargs climlab --ignore=test_emanuel_convection  # [osx]
-    #  Note that we are skipping these particular tests on osx because of a
-    #  mysterious failure on conda-forge
-    #  that only shows up with certain combinations of numpy and python versions
-    #  e.g. https://github.com/conda-forge/climlab-feedstock/pull/44
-    #  I've manually verified that the builds pass all tests locally and behave normally
-    #    BUT WE CAN'T ACTUALLY MIX --pyargs with --ignore, it doesn't work
+    - pytest -v -m fast --pyargs climlab
 
 about:
   home: https://github.com/brian-rose/climlab
