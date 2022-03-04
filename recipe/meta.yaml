@@ -20,9 +20,7 @@ requirements:
     - {{ compiler('fortran') }}
     - {{ compiler('m2w64_fortran') }}  # [win]
     - {{ compiler('c') }}
-    - libgfortran-devel_osx-64  # [build_platform != target_platform and build_platform == 'osx-64']
   host:
-    - m2w64-toolchain  # [win]
     - libpython  # [win]
     - python
     - setuptools
