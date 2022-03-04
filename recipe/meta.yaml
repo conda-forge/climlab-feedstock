@@ -27,7 +27,6 @@ requirements:
     - setuptools
     - pip
     - numpy
-    - gfortran  # [build_platform != target_platform]
   run:
     - python
     - {{ pin_compatible('numpy') }}
