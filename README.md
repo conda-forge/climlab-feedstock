@@ -226,6 +226,3 @@ Feedstock Maintainers
 * [@brian-rose](https://github.com/brian-rose/)
 * [@jhkennedy](https://github.com/jhkennedy/)
 
-
-<!-- dummy commit to enable rerendering -->
-
