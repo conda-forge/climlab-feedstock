@@ -28,6 +28,7 @@ requirements:
     - climlab-rrtmg
     - climlab-emanuel-convection
     - climlab-cam3-radiation
+    - six
 
 test:
   requires:
