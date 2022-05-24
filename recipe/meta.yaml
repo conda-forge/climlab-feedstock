@@ -37,7 +37,7 @@ test:
     - climlab
   commands:
     - pytest -v -m fast --pyargs climlab
-    - pytest -v -m fast --pyargs climlab.tests.test_bandrc climlab.tests.test_cam3rad climlab.tests.test_domain2D climlab.tests.test_ebm climlab.tests.test_emanuel_convection climlab.tests.test_grey_radiation climlab.tests.test_rcm climlab.tests.test_rrtm climlab.tests.test_thermo climlab.tests.xarray_test  # [python_impl == 'pypy']
+    - pytest -v -m fast --pyargs climlab.tests.test_bandrc climlab.tests.test_cam3rad climlab.tests.test_domain2D climlab.tests.test_ebm climlab.tests.test_emanuel_convection climlab.tests.test_grey_radiation climlab.tests.test_rcm climlab.tests.test_rrtm climlab.tests.test_thermo climlab.tests.xarray_test
 
 about:
   home: https://github.com/climlab/climlab
