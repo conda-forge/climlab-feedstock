@@ -1,4 +1,4 @@
-{% set version = "0.7.13" %}
+{% set version = "0.8.1" %}
 
 package:
   name: climlab
@@ -6,33 +6,29 @@ package:
 
 source:
   url: https://pypi.io/packages/source/c/climlab/climlab-{{ version }}.tar.gz
-  sha256: 0b9498bf6dd1ab97665cab34ce4602c1d781c3a6365cd243f53c1fa3af669c23
+  sha256: b5ab8b68680e3ce7bece80ea9d15e9c30829ac40c9db6b09ec9c70b4a111d19e
 
 build:
-  number: 1
-  skip: true  # [win and py<30]
+  noarch: python
+  number: 0
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
-  build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - numpy                                  # [build_platform != target_platform]
-    - {{ compiler('fortran') }}
-    - {{ compiler('m2w64_fortran') }}  # [win]
-    - {{ compiler('c') }}
   host:
-    - libpython  # [win]
-    - python
+    - python >=3.6
     - setuptools
     - pip
-    - numpy
   run:
-    - python
-    - {{ pin_compatible('numpy') }}
-    - scipy
+    - python >=3.6
     - pooch
     - xarray
+    - numpy
+    - scipy
     - future
+    - climlab-rrtmg
+    - climlab-emanuel-convection
+    - climlab-cam3-radiation
+    - six
 
 test:
   requires:
@@ -40,17 +36,16 @@ test:
   imports:
     - climlab
   commands:
-    - pytest -v -m fast --pyargs climlab  # [python_impl != 'pypy']
-    - pytest -v -m fast --pyargs climlab.tests.test_bandrc climlab.tests.test_cam3rad climlab.tests.test_domain2D climlab.tests.test_ebm climlab.tests.test_emanuel_convection climlab.tests.test_grey_radiation climlab.tests.test_rcm climlab.tests.test_rrtm climlab.tests.test_thermo climlab.tests.xarray_test  # [python_impl == 'pypy']
+    - pytest -v -m fast --pyargs climlab
 
 about:
-  home: https://github.com/brian-rose/climlab
+  home: https://github.com/climlab/climlab
   license: MIT
   license_family: MIT
   license_file: LICENSE
   summary: Python package for process-oriented climate modeling
   doc_url: http://climlab.readthedocs.io/
-  dev_url: https://github.com/brian-rose/climlab
+  dev_url: https://github.com/climlab/climlab
 
 extra:
   recipe-maintainers:
