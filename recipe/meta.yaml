@@ -10,7 +10,7 @@ source:
 
 build:
   noarch: python
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
@@ -25,9 +25,9 @@ requirements:
     - numpy
     - scipy
     - future
-    - climlab-rrtmg
+    - climlab-rrtmg <0.3
     - climlab-emanuel-convection
-    - climlab-cam3-radiation
+    - climlab-cam3-radiation <0.3
     - six
 
 test:
