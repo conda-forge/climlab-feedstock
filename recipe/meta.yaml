@@ -1,4 +1,4 @@
-{% set version = "0.9.0" %}
+{% set version = "0.9.1" %}
 
 package:
   name: climlab
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/climlab/climlab-{{ version }}.tar.gz
-  sha256: 9e4205cf9dc37528911c3c59f0c770f2616ea75c07f833a44b2041cfa4e950b7
+  sha256: 4feaf3d9fa65adccd3d009087e0520af8039fafc2e1c66417fe25dbc73a37f05
 
 build:
   noarch: python
@@ -24,7 +24,6 @@ requirements:
     - xarray
     - numpy
     - scipy >=1.6
-    - future
     - climlab-rrtmg >=0.4.1
     - climlab-emanuel-convection
     - climlab-cam3-radiation >0.2
